@@ -31,7 +31,7 @@
     </div>
     <div class="buttons">
         <button class="btn" id="yesButton" onclick="nextPage()">Yes</button>
-        <button class="btn" id="noButton" onmouseover="moveButton()" onclick="moveButton()">No</button>
+        <button class="btn" id="noButton" onmouseover="moveButton()" onclick="handleNoClick()">No</button>
       <script>
               let paperHidden = false;
 
@@ -39,17 +39,20 @@
                 window.location.href = "yes.html";
               }
          
+              function handleNoClick() {
+                // Hide all paper elements only on the first click
+                if (!paperHidden) {
+                  const papers = document.querySelectorAll('.paper');
+                  papers.forEach(paper => {
+                    paper.style.display = 'none';
+                  });
+                  paperHidden = true;
+                }
+                // Move the button on click
+                moveButton();
+              }
 
               function moveButton() {
-                  // Hide all paper elements only on the first click
-                  if (!paperHidden) {
-                    const papers = document.querySelectorAll('.paper');
-                    papers.forEach(paper => {
-                      paper.style.display = 'none';
-                    });
-                    paperHidden = true;
-                  }
-
                   var x =
                     Math.random() *
                     (window.innerWidth -
